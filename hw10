@@ -1,0 +1,139 @@
+#include<iostream>
+#include<ctime>
+#include<string.h>
+using namespace std;
+
+struct Film
+{
+    char movie[50];
+    char producer[50];
+    char genre[50];
+    float rating;
+    float price;
+};
+
+void inscription(Film pat)
+{
+    cout << "\Title\t: " << pat.movie;
+    cout << "\nProd\t: " << pat.producer;
+    cout << "\nGenre\t: " << pat.genre;
+    cout << "\nRating\t: " << pat.rating;
+    cout << "\nPrice\t: " << pat.price << endl;
+    cout << endl;
+}
+
+bool NameSearch(Film film[], char user[], int lenght)
+{
+    bool flag = 0;
+    for (int i = 0; i < lenght; i++)
+    {
+
+        if (strstr(film[i].movie, user) != NULL)
+        {
+            cout << film[i].movie << " ";
+            flag = true;
+            break;
+        }
+        else { flag = false; }
+
+    }
+    return flag;
+}
+
+void GenreSearch(Film film, char user[])
+{
+
+    if (strstr(film.genre, user) != NULL)
+    {
+        cout << film.movie << " ";
+
+    }
+
+}
+
+void ProdSearch(Film film, char user[])
+{
+
+    if (strstr(film.producer, user) != NULL)
+    {
+        cout << film.movie << " ";
+
+    }
+
+}
+
+int main()
+{
+    cout << "(-----best films of the month-----)" << endl;
+    const int length = 2;
+    int input = 0;
+
+    Film a[length]
+    {
+        { "1)) Ghost Busters", "MARVEL", "horror", 9, 128 },
+        { "2)) Sonic 2", "V.Diesel","action", 7, 82 },
+    };
+
+    do
+    {
+        cout << "         Selection menu" << endl;
+        cout << "\nSearch title - [1]" << endl;
+        cout << "Search genre - [2]" << endl;
+        cout << "Search human - [3]" << endl;
+        cout << "All - [4]" << endl;
+        cout << "What would you like: ";
+        cin >> input;
+        cout << endl;
+
+        switch (input)
+        {
+        case 1:
+
+            char film1[50];
+            cout << "Enter movie title: ";
+            cin >> film1;
+
+            if (NameSearch(a, film1, length) == true)
+            {
+                cout << "(film found)\n" << endl;
+            }
+            else cout << "(film not found)\n" << endl;
+            break;
+
+        case 2:
+            char film2[50];
+            cout << "Enter the movie genre: ";
+            cin >> film2;
+            for (int i = 0; i < length; i++)
+            {
+                GenreSearch(a[i], film2);
+            }
+            cout << endl;
+            break;
+
+        case 3:
+            char film3[50];
+            cout << "Enter movie producer: ";
+            cin >> film3;
+            for (int i = 0; i < length; i++)
+            {
+                ProdSearch(a[i], film3);
+            }
+            cout << endl;
+            break;
+        case 4:
+
+            for (int i = 0; i < length; i++)
+                inscription(a[i]);
+            break;
+        case 5:
+
+        default:
+            break;
+        }
+    } while (input = 4);
+
+    cout << endl; cout << endl;
+    system("pause");
+    return 0;
+}
